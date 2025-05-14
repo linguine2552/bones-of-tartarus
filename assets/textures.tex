@@ -118,6 +118,25 @@ textureC += "77777777";
 textureC += "ooooo.#7";
 
 
+// Define spawner texture pattern
+var spawnerTex = "";
+spawnerTex += "..********.....";
+spawnerTex += "..**SSSS**.....";
+spawnerTex += ".**SSSSSS**.***";
+spawnerTex += ".*SS*SS*SS*.*S*";
+spawnerTex += ".*SS*SS*SS*.**S";
+spawnerTex += ".*SSSSSSSS*..SS";
+spawnerTex += ".**SSSSSS**..SS";
+spawnerTex += "..**SSSS**...SS";
+spawnerTex += "..********...SS";
+spawnerTex += "...........**S*";
+spawnerTex += "...........*S**";
+spawnerTex += "...........***.";
+spawnerTex += "................";
+spawnerTex += "................";
+spawnerTex += "................";
+spawnerTex += "................";
+
 // Array assignes textures to keys that will
 // correspond with their coordinates on the map
 var textures = {
@@ -150,6 +169,12 @@ var textures = {
     "N": textureN,
     "S": textureS,
     "scale": 1
+  },
+  "S": {
+    "texture": spawnerTex,
+    "scale": 1.5,
+    "height": 16,
+    "width": 16
   },
 };
 

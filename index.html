@@ -4,29 +4,102 @@
     <title>3D ASCII Game Engine</title>
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' >
 
-    <script id="gameEngine" type="text/javascript" src="src/game-engine.js?v=0.2.0"></script>
+    <!-- Original engine script (comment out when using refactored version) -->
+    <!-- <script id="gameEngine" type="text/javascript" src="src/game-engine.js?v=0.2.0"></script> -->
+    
+    <!-- Refactored engine modules -->
+    <script id="gameUtils" type="text/javascript" src="src/utils.js"></script>
+    <script id="gameAssets" type="text/javascript" src="src/assets.js"></script>
+    <script id="gameInput" type="text/javascript" src="src/input.js"></script>
+    <script id="gameEntities" type="text/javascript" src="src/entities.js"></script>
+    <script id="gameRenderer" type="text/javascript" src="src/renderer.js"></script>
+    <script id="gameMultiplayer" type="text/javascript" src="src/multiplayer.js"></script>
+    <script id="gameMapMaker" type="text/javascript" src="src/map-maker.js"></script>
+    <script id="gameCore" type="text/javascript" src="src/core.js"></script>
+    
+    <!-- Game assets -->
     <script id="textures" type="text/javascript" src="assets/textures.tex"></script>
-    <script id="textures" type="text/javascript" src="assets/sprites.tex"></script>
+    <script id="sprites" type="text/javascript" src="assets/sprites.tex"></script>
+    <script id="mp_sprites" type="text/javascript" src="assets/multiplayer_sprites.tex"></script>
     <!-- <script id="textures" type="text/javascript" src="assets/pogelfont.tex"></script> -->
     <script id="map" type="text/javascript" src="assets/levelfile1.map"></script>
 
     <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      #main-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.9);
+        z-index: 1000;
+      }
       body{
         background: black;
         color: white;
         font-family: 'Consolas',Courier, monospace;
         font-size: 6px;
         line-height: 1.15em;
-        overflow: hidden;
         text-align: center;
         touch-action: none;
+        display: flex;
+        flex-direction: column;
       }
       #game{
         position: relative;
+        flex: 1;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
       }
       #display{
-        display: inline-block;
+        display: block;
+        width: 100%;
+        height: 100%;
         pointer-events: none;
+        text-align: center;
+        overflow: hidden;
+      }
+      #compass{
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 16px;
+        z-index: 100;
+        text-align: center;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.6);
+        border: 1px solid #444;
+        padding: 5px;
+        border-radius: 5px;
+        letter-spacing: 0;
+        pointer-events: none;
+        color: white;
+        text-shadow: 1px 1px 2px black;
+      }
+      .game-row {
+        display: block;
+        width: 100%;
+        white-space: nowrap;
+        line-height: 1.15em;
+        letter-spacing: 0;
+        font-kerning: none;
+        font-variant-ligatures: none;
       }
       #seconddisplay{
         position: absolute;
@@ -53,41 +126,385 @@
         cursor: none;
       }
       #debug{
-        clear: both;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        background-color: rgba(0, 0, 0, 0.7);
+        border: 1px solid #444;
+        padding: 10px;
+        font-size: 14px;
+        color: #ffcc00;
+        z-index: 100;
+        border-radius: 5px;
+        text-align: left;
       }
+      #lookfactor-debug {
+        font-family: monospace;
+		line-height: 15px;
+      }
+      #ui-overlay {
+        position: fixed;
+        bottom: 10px;
+        left: 0;
+        width: 100%;
+        z-index: 100;
+        pointer-events: auto;
+        text-align: center;
+        font-size: 14px;
+        color: white;
+        text-shadow: 1px 1px 2px black;
+      }
+      #controls {
+        margin: 10px auto;
+      }
+      .hint {
+        margin-bottom: 5px;
+        font-style: italic;
+      }
+      .render-controls {
+        margin: 5px 0;
+      }
+      .render-controls button {
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        border: 1px solid #444;
+        padding: 5px 10px;
+        margin: 0 5px;
+        cursor: pointer;
+      }
+      .render-controls button:hover {
+        background: rgba(60, 60, 60, 0.7);
+      }
+      #settings-panel {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 360px;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        border: 1px solid #444;
+        border-radius: 5px;
+        padding: 20px;
+        z-index: 1000;
+        display: none;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        font-size: 16px;
+      }
+
+      #settings-panel h2 {
+        text-align: center;
+        margin-top: 0;
+        color: #ffcc00;
+        border-bottom: 1px solid #444;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+        font-size: 22px;
+      }
+
+      .settings-section {
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #222;
+      }
+
+      .settings-section h3 {
+        margin-top: 0;
+        margin-bottom: 8px;
+        font-size: 18px;
+        color: #aaaaaa;
+      }
+
+      .settings-section:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+      }
+
+      .settings-controls {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      .settings-controls button {
+        background: rgba(30, 30, 30, 0.7);
+        color: white;
+        border: 1px solid #444;
+        padding: 8px 12px;
+        cursor: pointer;
+        border-radius: 3px;
+        font-size: 15px;
+      }
+
+      .settings-controls button:hover {
+        background: rgba(60, 60, 60, 0.7);
+      }
+
+      .settings-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        font-size: 16px;
+      }
+
+      .settings-help {
+        text-align: center;
+        margin-top: 12px;
+        font-size: 14px;
+        color: #888;
+      }
+
+      #main-menu h1 {
+        color: #ffcc00;
+        font-size: 36px;
+        margin-bottom: 30px;
+        text-shadow: 0 0 10px rgba(255, 204, 0, 0.7);
+      }
+
+      #main-menu-container {
+        background-color: rgba(0, 0, 0, 0.7);
+        border: 1px solid #444;
+        border-radius: 5px;
+        padding: 30px 40px;
+        width: 320px;
+        text-align: center;
+      }
+
+      .menu-input-group {
+        margin-bottom: 20px;
+        text-align: left;
+      }
+
+      .menu-input-group label {
+        display: block;
+        margin-bottom: 5px;
+        color: #aaaaaa;
+        font-size: 14px;
+      }
+
+      .menu-input-group input {
+        width: 100%;
+        padding: 8px;
+        background-color: rgba(30, 30, 30, 0.7);
+        border: 1px solid #444;
+        color: white;
+        border-radius: 3px;
+        font-family: 'Consolas', Courier, monospace;
+      }
+
+      .menu-button {
+        background-color: #ffcc00;
+        color: #000;
+        border: none;
+        padding: 10px 20px;
+        margin-top: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 3px;
+        font-family: 'Consolas', Courier, monospace;
+        font-weight: bold;
+        transition: background-color 0.2s;
+      }
+
+      .menu-button:hover {
+        background-color: #ffd700;
+      }
+      
+      .map-maker-button {
+        margin-top: 10px;
+        background-color: #4488aa;
+      }
+      
+      .map-maker-button:hover {
+        background-color: #55aacc;
+      }
+
       @media(max-width: 768px){
         body{
           font-size: 3px;
+        }
+        #ui-overlay {
+          font-size: 10px;
+        }
+        .render-controls button {
+          padding: 3px 6px;
+        }
+        #settings-panel {
+          width: 300px;
+          padding: 15px;
+          font-size: 14px;
+        }
+        #settings-panel h2 {
+          font-size: 20px;
+        }
+        #settings-section h3 {
+          font-size: 16px;
+        }
+        .settings-row {
+          font-size: 14px;
+        }
+        .settings-controls button {
+          font-size: 14px;
+          padding: 6px 10px;
+        }
+        .settings-help {
+          font-size: 12px;
+        }
+        #compass {
+          font-size: 12px;
+          width: 32px;
+          height: 32px;
+          top: 10px;
+          right: 10px;
+        }
+        #main-menu h1 {
+          font-size: 28px;
+        }
+        #main-menu-container {
+          width: 280px;
+          padding: 20px;
         }
       }
     </style>
   </head>
   <body>
+    <!-- Main Menu -->
+    <div id="main-menu">
+      <h1>TARTARUS</h1>
+      <div id="main-menu-container">
+        <div class="menu-input-group">
+          <label for="player-name">Enter Your Name:</label>
+          <input type="text" id="player-name" maxlength="15" placeholder="Player">
+        </div>
+        <button id="start-game" class="menu-button">ENTER THE DUNGEON</button>
+        <button id="open-map-maker" class="menu-button map-maker-button">MAP MAKER</button>
+      </div>
+    </div>
+    
+    <!-- Map Maker Container -->
+    <div id="map-maker-wrapper" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2000;"></div>
 
     <div id="game">
       <div id="display"></div>
       <div id="seconddisplay"></div>
+      <div id="compass"></div>
       <div id="touchinputlook"></div>
       <div id="touchinputmove"></div>
+
+      <div id="ui-overlay">
+      </div>
+      
+      <!-- Debug Element -->
+      <div id="debug">
+        <div id="lookfactor-debug"></div>
+      </div>
+
+      <!-- Settings Panel -->
+      <div id="settings-panel">
+        <h2>TARTARUS Settings</h2>
+
+        <div class="settings-section">
+          <h3>Rendering Mode</h3>
+          <div class="settings-controls">
+            <button id="settings-solid">Solid</button>
+            <button id="settings-texture">Texture</button>
+            <button id="settings-shader">Shaded Texture</button>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h3>Multiplayer</h3>
+          <div class="settings-row">
+            <span>Status:</span>
+            <span id="mp-status-display">Connecting...</span>
+          </div>
+          <div class="settings-row">
+            <span>Player Count:</span>
+            <span id="mp-player-count">-</span>
+          </div>
+          <div class="settings-controls">
+            <button id="mp-toggle">Enable/Disable</button>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h3>Game Info</h3>
+          <div class="settings-row">
+            <span>FPS:</span>
+            <span id="fps-display">-</span>
+          </div>
+          <div class="settings-row">
+            <span>Position:</span>
+            <span id="position-display">-</span>
+          </div>
+        </div>
+
+        <div class="settings-help">
+          Press <code>~</code> (backtick) to toggle settings
+        </div>
+      </div>
     </div>
 
-    <br>
-    Click game screen to use mouse
-
-    <div id="debug" style="font-size: 2em; line-height: 2em;"></div>
-
-    <h2>Render Mode</h2>
-    <button id="solid">Solid</button>
-    <button id="texture">Texture</button>
-    <button id="shader">Shaded Texture</button>
-
-    <br><br>
-    <a href="https://github.com/justMoritz/3d-game-engine" target="_blank" style="color: white;">GitHub repo</a>
-    <br>
-    2020-2021 by Moritz Zimmer
-
     <script>
-      gameEngineJS.init();
+      // Main menu handling
+      document.addEventListener('DOMContentLoaded', function() {
+        const mainMenu = document.getElementById('main-menu');
+        const startGameButton = document.getElementById('start-game');
+        const openMapMakerButton = document.getElementById('open-map-maker');
+        const playerNameInput = document.getElementById('player-name');
+        const mapMakerWrapper = document.getElementById('map-maker-wrapper');
+        
+        // Set focus on player name input
+        playerNameInput.focus();
+        
+        // Handle start game button click
+        startGameButton.addEventListener('click', function() {
+          // Get player name (default to 'Player' if empty)
+          const playerName = playerNameInput.value.trim() || 'Player';
+          
+          // Store player name in localStorage for persistence
+          localStorage.setItem('playerName', playerName);
+          
+          // Hide the main menu
+          mainMenu.style.display = 'none';
+          
+          // Initialize the game
+          GameCore.init();
+        });
+        
+        // Handle map maker button click
+        openMapMakerButton.addEventListener('click', function() {
+          // Hide the main menu
+          mainMenu.style.display = 'none';
+          
+          // Show the map maker
+          mapMakerWrapper.style.display = 'block';
+          
+          // Initialize the map maker if not already done
+          if (!mapMakerWrapper.hasInitialized) {
+            GameMapMaker.init('map-maker-wrapper');
+            mapMakerWrapper.hasInitialized = true;
+          }
+          
+          // Show the map maker UI
+          GameMapMaker.showMapMaker();
+        });
+        
+        // Handle Enter key in player name input
+        playerNameInput.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+            startGameButton.click();
+          }
+        });
+        
+        // Check if player name is already stored
+        const savedPlayerName = localStorage.getItem('playerName');
+        if (savedPlayerName) {
+          playerNameInput.value = savedPlayerName;
+        }
+      });
     </script>
   </body>
 </html>

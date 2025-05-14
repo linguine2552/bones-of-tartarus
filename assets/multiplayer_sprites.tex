@@ -1,0 +1,423 @@
+/**
+ * Multiplayer Sprites for TARTARUS
+ * 
+ * Defines sprites for other players in multiplayer mode
+ */
+
+// Create multiplayer player sprite - exact copy of pogel sprite
+var multiplayerFront = "";
+multiplayerFront += "......**..**......";
+multiplayerFront += ".....*##**##*.....";
+multiplayerFront += "....*###7###7*....";
+multiplayerFront += "....*########7*...";
+multiplayerFront += "...*####7####7*...";
+multiplayerFront += "...*##*#7#*##7*...";
+multiplayerFront += "...*####7####7*...";
+multiplayerFront += "....*7#777##7*....";
+multiplayerFront += ".....*77777**.....";
+multiplayerFront += "......*7777*......";
+multiplayerFront += "......*777*.......";
+multiplayerFront += ".......*77*.......";
+multiplayerFront += ".......*7#*.......";
+multiplayerFront += "......*7###7*.....";
+multiplayerFront += ".....*7####7*.....";
+multiplayerFront += ".....*7####7*.....";
+multiplayerFront += ".....*######*.....";
+multiplayerFront += ".....*7###77*.....";
+multiplayerFront += "......*7#77*......";
+multiplayerFront += "......*77#*.......";
+multiplayerFront += "......*#7#*.......";
+multiplayerFront += "....***7*7***.....";
+multiplayerFront += "....*777*7777*....";
+multiplayerFront += "....*777*7777*....";
+multiplayerFront += "....**********.....";
+
+var multiplayerBack = "";
+multiplayerBack += "......**..**......";
+multiplayerBack += ".....*#***77*.....";
+multiplayerBack += "....*###*###7*....";
+multiplayerBack += "....*###**###7*...";
+multiplayerBack += "...*####**###7*...";
+multiplayerBack += "...*####**7##7*...";
+multiplayerBack += "...*#####*7##7*...";
+multiplayerBack += "....*7####777*....";
+multiplayerBack += ".....*7###77*.....";
+multiplayerBack += "......*777**......";
+multiplayerBack += ".......*#*........";
+multiplayerBack += ".......*#*........";
+multiplayerBack += ".......*7*........";
+multiplayerBack += "......*#7#7*......";
+multiplayerBack += ".....*7####7*.....";
+multiplayerBack += ".....*7####7*.....";
+multiplayerBack += ".....*######*.....";
+multiplayerBack += ".....*7###77*.....";
+multiplayerBack += "......*7#77*......";
+multiplayerBack += "......*77#*.......";
+multiplayerBack += "......*#7#*.......";
+multiplayerBack += "....***7*7***.....";
+multiplayerBack += "....*777*7777*....";
+multiplayerBack += "....*777*7777*....";
+multiplayerBack += "....**********....";
+
+var multiplayerLeft = "";
+multiplayerLeft += "......**.***......";
+multiplayerLeft += ".....*##*###*.....";
+multiplayerLeft += "....*#######7*....";
+multiplayerLeft += "....*##7####7*....";
+multiplayerLeft += "...*###7####7*..**";
+multiplayerLeft += "...*#*#7#*##7*.*..";
+multiplayerLeft += "...*###7###7*.*...";
+multiplayerLeft += "...**77#777#7*..*.";
+multiplayerLeft += "..*77777####7**..*";
+multiplayerLeft += ".*777777###7*.*...";
+multiplayerLeft += "*777777*#77*......";
+multiplayerLeft += "*7777**##7*.......";
+multiplayerLeft += "*****77#77*.......";
+multiplayerLeft += "......*###7*......";
+multiplayerLeft += "......*###7*......";
+multiplayerLeft += ".....*7###7*......";
+multiplayerLeft += "....*#7###7*......";
+multiplayerLeft += "....*####77*......";
+multiplayerLeft += ".....*7****.......";
+multiplayerLeft += ".....*7###*.......";
+multiplayerLeft += ".....*#**#*.......";
+multiplayerLeft += "...***7*77*.......";
+multiplayerLeft += "...*777777*.......";
+multiplayerLeft += "...*777777*.......";
+multiplayerLeft += "...********.......";
+
+var multiplayerRight = "";
+multiplayerRight += "......***.**......";
+multiplayerRight += ".....*###*##*.....";
+multiplayerRight += "....*7#######*....";
+multiplayerRight += "....*7####7##*....";
+multiplayerRight += "**..*7####7###*...";
+multiplayerRight += "..*.*7##*#7#*#*...";
+multiplayerRight += "...*.*7###7###*...";
+multiplayerRight += ".*..*7#777#77**...";
+multiplayerRight += "*..**7####77777*..";
+multiplayerRight += "...*.*7###777777*.";
+multiplayerRight += "......*77#*777777*";
+multiplayerRight += ".......*7##**7777*";
+multiplayerRight += ".......*77#77*****";
+multiplayerRight += "......*7###*......";
+multiplayerRight += "......*7###*......";
+multiplayerRight += "......*7###7*.....";
+multiplayerRight += "......*7###7#*....";
+multiplayerRight += "......*77####*....";
+multiplayerRight += ".......****7*.....";
+multiplayerRight += ".......*###7*.....";
+multiplayerRight += ".......*#**#*.....";
+multiplayerRight += ".......*77*7***...";
+multiplayerRight += ".......*777777*...";
+multiplayerRight += ".......*777777*...";
+multiplayerRight += ".......********...";
+
+// Add multiplayer walking animation frames
+var multiplayerFrontW1 = "";
+multiplayerFrontW1 += "..................";
+multiplayerFrontW1 += "......**..**......";
+multiplayerFrontW1 += ".....*##**##*.....";
+multiplayerFrontW1 += "....*###7###7*....";
+multiplayerFrontW1 += "....*########7*...";
+multiplayerFrontW1 += "...*####7####7*...";
+multiplayerFrontW1 += "...*##*#7#*##7*...";
+multiplayerFrontW1 += "...*####7####7*...";
+multiplayerFrontW1 += "....*7#777##7*....";
+multiplayerFrontW1 += ".....*77777**.....";
+multiplayerFrontW1 += "......*7777*......";
+multiplayerFrontW1 += "......*777*.......";
+multiplayerFrontW1 += ".......*77*.......";
+multiplayerFrontW1 += "......*#7#7*......";
+multiplayerFrontW1 += ".....*7####7*.....";
+multiplayerFrontW1 += ".....*7####77*....";
+multiplayerFrontW1 += "....*77####7#*....";
+multiplayerFrontW1 += "....***###7##*....";
+multiplayerFrontW1 += "......*7#77**.....";
+multiplayerFrontW1 += "....***###*.......";
+multiplayerFrontW1 += "....*777##*.......";
+multiplayerFrontW1 += "....*777*77*......";
+multiplayerFrontW1 += "....*777*77*......";
+multiplayerFrontW1 += "....**77****......";
+multiplayerFrontW1 += ".....****.........";
+
+var multiplayerFrontW2 = "";
+multiplayerFrontW2 += "..................";
+multiplayerFrontW2 += "......**..**......";
+multiplayerFrontW2 += ".....*##**##*.....";
+multiplayerFrontW2 += "....*###7###7*....";
+multiplayerFrontW2 += "....*########7*...";
+multiplayerFrontW2 += "...*####7####7*...";
+multiplayerFrontW2 += "...*##*#7#*##7*...";
+multiplayerFrontW2 += "...*####7####7*...";
+multiplayerFrontW2 += "....*7#777##7*....";
+multiplayerFrontW2 += ".....*77777**.....";
+multiplayerFrontW2 += "......*7777*......";
+multiplayerFrontW2 += "......*777*.......";
+multiplayerFrontW2 += ".......*77*.......";
+multiplayerFrontW2 += ".....*7#7#*.......";
+multiplayerFrontW2 += "....*7####7*......";
+multiplayerFrontW2 += "...*77####7* .....";
+multiplayerFrontW2 += "...*#7####77*.....";
+multiplayerFrontW2 += "...*##7##7***.....";
+multiplayerFrontW2 += "....**77#7*.......";
+multiplayerFrontW2 += "......*###***.....";
+multiplayerFrontW2 += "......*##777*.....";
+multiplayerFrontW2 += ".....*77*777*.....";
+multiplayerFrontW2 += ".....*77*777*.....";
+multiplayerFrontW2 += ".....****77**.....";
+multiplayerFrontW2 += "........****......";
+
+var multiplayerBackW1 = "";
+multiplayerBackW1 += ".......*..........";
+multiplayerBackW1 += "......**..**......";
+multiplayerBackW1 += ".....*#***77*.....";
+multiplayerBackW1 += "....*###*###7*....";
+multiplayerBackW1 += "....*###**###7*...";
+multiplayerBackW1 += "...*####**###7*...";
+multiplayerBackW1 += "...*####**7##7*...";
+multiplayerBackW1 += "...*#####*7##7*...";
+multiplayerBackW1 += "....*7####777*....";
+multiplayerBackW1 += ".....*7###77*.....";
+multiplayerBackW1 += "......*777**......";
+multiplayerBackW1 += ".......*#*........";
+multiplayerBackW1 += ".......*#**.......";
+multiplayerBackW1 += ".....**#77*.......";
+multiplayerBackW1 += "... *7####7*......";
+multiplayerBackW1 += "...*77####7*......";
+multiplayerBackW1 += "...*##7###77*.....";
+multiplayerBackW1 += "...*##7##7***.....";
+multiplayerBackW1 += "....**77#7*.......";
+multiplayerBackW1 += "......*###***.....";
+multiplayerBackW1 += "......*###77*.....";
+multiplayerBackW1 += ".....*77*777*.....";
+multiplayerBackW1 += ".....*77*777*.....";
+multiplayerBackW1 += ".....****77**.....";
+multiplayerBackW1 += "........****......";
+
+var multiplayerBackW2 = "";
+multiplayerBackW2 += "...........*......";
+multiplayerBackW2 += "......**..**......";
+multiplayerBackW2 += ".....*##***7*.....";
+multiplayerBackW2 += "....*###7*##7*....";
+multiplayerBackW2 += "....*####*###7*...";
+multiplayerBackW2 += "...*####7*###7*...";
+multiplayerBackW2 += "...*####**7##7*...";
+multiplayerBackW2 += "...*######7##7*...";
+multiplayerBackW2 += "....*7####777*....";
+multiplayerBackW2 += ".....*7###77*.....";
+multiplayerBackW2 += "......*777**......";
+multiplayerBackW2 += ".......*#*........";
+multiplayerBackW2 += ".......*#**.......";
+multiplayerBackW2 += "......*#7#7*......";
+multiplayerBackW2 += ".....*7####7*.....";
+multiplayerBackW2 += ".....*7####77*....";
+multiplayerBackW2 += "....*77###7##*....";
+multiplayerBackW2 += "....***###7##*....";
+multiplayerBackW2 += "......*7#77**.....";
+multiplayerBackW2 += "....***###*.......";
+multiplayerBackW2 += "....*77###*.......";
+multiplayerBackW2 += "....*777*77*......";
+multiplayerBackW2 += "....*777*77*......";
+multiplayerBackW2 += "....**77****......";
+multiplayerBackW2 += ".....****.........";
+
+var multiplayerLeftW1 = "";
+multiplayerLeftW1 += "......**.***......";
+multiplayerLeftW1 += ".....*##*###*.....";
+multiplayerLeftW1 += "....*#######7*....";
+multiplayerLeftW1 += "....*##7####7*....";
+multiplayerLeftW1 += "...*###7####7*..**";
+multiplayerLeftW1 += "...*#*#7#*##7*.*..";
+multiplayerLeftW1 += "...*###7###7*.*...";
+multiplayerLeftW1 += "...**77#777#7*..*.";
+multiplayerLeftW1 += "..*77777####7**..*";
+multiplayerLeftW1 += ".*777777###7*.*...";
+multiplayerLeftW1 += "*777777*#77*......";
+multiplayerLeftW1 += "*7777**##7*.......";
+multiplayerLeftW1 += "*****77#77*.......";
+multiplayerLeftW1 += "......*##77*......";
+multiplayerLeftW1 += "......*#777*......";
+multiplayerLeftW1 += "....**###777*.....";
+multiplayerLeftW1 += "...*#7####77*.....";
+multiplayerLeftW1 += "...*77###7#7*.....";
+multiplayerLeftW1 += "....**7##7##*.....";
+multiplayerLeftW1 += ".....*#777***.....";
+multiplayerLeftW1 += "...****####7*.....";
+multiplayerLeftW1 += "...*777*###7*.....";
+multiplayerLeftW1 += "...*7777##77*.....";
+multiplayerLeftW1 += "...***777#***.....";
+multiplayerLeftW1 += ".....******.......";
+
+var multiplayerLeftW2 = "";
+multiplayerLeftW2 += "......**.***......";
+multiplayerLeftW2 += ".....*##*###*.....";
+multiplayerLeftW2 += "....*#######7*....";
+multiplayerLeftW2 += "....*##7####7*....";
+multiplayerLeftW2 += "...*###7####7*..**";
+multiplayerLeftW2 += "...*#*#7#*##7*.*..";
+multiplayerLeftW2 += "...*###7###7*.*...";
+multiplayerLeftW2 += "...**77#777#7*..*.";
+multiplayerLeftW2 += "..*77777####7**..*";
+multiplayerLeftW2 += ".*777777###7*.*...";
+multiplayerLeftW2 += "*777777*#77*......";
+multiplayerLeftW2 += "*7777**##7*.......";
+multiplayerLeftW2 += "*****77#77*.......";
+multiplayerLeftW2 += "......*##7*.......";
+multiplayerLeftW2 += ".....***77**......";
+multiplayerLeftW2 += "....*#7777##*.....";
+multiplayerLeftW2 += "...*##777*7#*.....";
+multiplayerLeftW2 += "....*77***7*......";
+multiplayerLeftW2 += ".....**#7**.......";
+multiplayerLeftW2 += "......*77****.....";
+multiplayerLeftW2 += "..*****#777**.....";
+multiplayerLeftW2 += "..*77*##7777*.....";
+multiplayerLeftW2 += "..*7777**777*.....";
+multiplayerLeftW2 += "..***77**777*.....";
+multiplayerLeftW2 += "....*********.....";
+
+var multiplayerRightW1 = "";
+multiplayerRightW1 += "......***.**......";
+multiplayerRightW1 += ".....*###*##*.....";
+multiplayerRightW1 += "....*7#######*....";
+multiplayerRightW1 += "....*7####7##*....";
+multiplayerRightW1 += "**..*7####7###*...";
+multiplayerRightW1 += "..*.*7##*#7#*#*...";
+multiplayerRightW1 += "...*.*7###7###*...";
+multiplayerRightW1 += ".*..*7#777#77**...";
+multiplayerRightW1 += "*..**7####77777*..";
+multiplayerRightW1 += "...*.*7###777777*.";
+multiplayerRightW1 += "......*77#*777777*";
+multiplayerRightW1 += ".......*7##**7777*";
+multiplayerRightW1 += ".......*77#77*****";
+multiplayerRightW1 += "......*77##*......";
+multiplayerRightW1 += "......*777#*......";
+multiplayerRightW1 += ".....*777###**....";
+multiplayerRightW1 += ".....*77####7#*...";
+multiplayerRightW1 += ".....*7#7###77*...";
+multiplayerRightW1 += ".....*##7##7**....";
+multiplayerRightW1 += ".....***777#*.....";
+multiplayerRightW1 += ".....*7####****...";
+multiplayerRightW1 += ".....*7###*777*...";
+multiplayerRightW1 += ".....*77##7777*...";
+multiplayerRightW1 += ".....***#777***...";
+multiplayerRightW1 += ".......******.....";
+
+var multiplayerRightW2 = "";
+multiplayerRightW2 += "......***.**......";
+multiplayerRightW2 += ".....*###*##*.....";
+multiplayerRightW2 += "....*7#######*....";
+multiplayerRightW2 += "....*7####7##*....";
+multiplayerRightW2 += "**..*7####7###*...";
+multiplayerRightW2 += "..*.*7##*#7#*#*...";
+multiplayerRightW2 += "...*.*7###7###*...";
+multiplayerRightW2 += ".*..*7#777#77**...";
+multiplayerRightW2 += "*..**7####77777*..";
+multiplayerRightW2 += "...*.*7###777777*.";
+multiplayerRightW2 += "......*77#*777777*";
+multiplayerRightW2 += ".......*7##**7777*";
+multiplayerRightW2 += ".......*77#77*****";
+multiplayerRightW2 += ".......*7##*......";
+multiplayerRightW2 += "......**77***.....";
+multiplayerRightW2 += ".....*##7777#*....";
+multiplayerRightW2 += ".....*#7*777##*...";
+multiplayerRightW2 += "......*7***77*....";
+multiplayerRightW2 += ".......**7#**.....";
+multiplayerRightW2 += ".....****77*......";
+multiplayerRightW2 += ".....**777#*****..";
+multiplayerRightW2 += ".....*7777##*77*..";
+multiplayerRightW2 += ".....*777**7777*..";
+multiplayerRightW2 += ".....*777**77***..";
+multiplayerRightW2 += ".....*********....";
+
+// Add multiplayer sprites to the global allSprites object
+if (typeof allSprites !== 'undefined') {
+  allSprites["MP"] = {
+    "texture": multiplayerFront,
+    "height": 25,
+    "width": 18,
+    "scale": 1,
+    "aspctRt": 1.66,
+    "hghtFctr": 0.4,
+    "walkframes": true, // Enable walk animation
+    // We're using standard characters now for proper shading
+    "angles": {
+      "F": {
+        "texture": multiplayerFront,
+        "height": 25,
+        "width": 18,
+        "scale": 1,
+        "W1": {
+          "texture": multiplayerFrontW1,
+          "height": 25,
+          "width": 18,
+          "scale": 1
+        },
+        "W2": {
+          "texture": multiplayerFrontW2,
+          "height": 25,
+          "width": 18,
+          "scale": 1
+        }
+        // Using standard characters now for proper shading
+      },
+      "B": {
+        "texture": multiplayerBack,
+        "height": 25,
+        "width": 18,
+        "scale": 1,
+        "W1": {
+          "texture": multiplayerBackW1,
+          "height": 25,
+          "width": 18,
+          "scale": 1
+        },
+        "W2": {
+          "texture": multiplayerBackW2,
+          "height": 25,
+          "width": 18,
+          "scale": 1
+        }
+        // Using standard characters now for proper shading
+      },
+      "L": {
+        "texture": multiplayerLeft,
+        "height": 25,
+        "width": 18,
+        "scale": 1,
+        "W1": {
+          "texture": multiplayerLeftW1,
+          "height": 25,
+          "width": 18,
+          "scale": 1
+        },
+        "W2": {
+          "texture": multiplayerLeftW2,
+          "height": 25,
+          "width": 18,
+          "scale": 1
+        }
+        // Using standard characters now for proper shading
+      },
+      "R": {
+        "texture": multiplayerRight,
+        "height": 25,
+        "width": 18,
+        "scale": 1,
+        "W1": {
+          "texture": multiplayerRightW1,
+          "height": 25,
+          "width": 18,
+          "scale": 1
+        },
+        "W2": {
+          "texture": multiplayerRightW2,
+          "height": 25,
+          "width": 18,
+          "scale": 1
+        }
+        // Using standard characters now for proper shading
+      }
+    }
+  };
+}
